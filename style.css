@@ -788,3 +788,23 @@ footer {
         flex-wrap: wrap;
     }
 }
+
+.food-order-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.food-order-controls input {
+    width: 65px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.food-order-controls .food-button {
+    padding: 10px 16px;
+}
