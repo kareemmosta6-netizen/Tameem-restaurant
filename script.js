@@ -126,3 +126,19 @@ function checkoutOnWhatsApp() {
 
     window.open(url, "_blank");
 }
+
+function addSelectedQuantity(name, price, inputId) {
+    const input = document.getElementById(inputId);
+    const quantity = Number(input.value);
+
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) {
+        alert("اختار كمية من 1 إلى 20.");
+        return;
+    }
+
+    for (let i = 0; i < quantity; i++) {
+        addToCart(name, price);
+    }
+
+    input.value = 1;
+}
