@@ -78,9 +78,25 @@
 
             <div class="food-bottom">
                 <strong>150 جنيه</strong>
-                <button class="food-button" onclick="addToCart('تميم برجر', 150)">
-             أضف للسلة
-                </button>
+                
+<div class="food-order-controls">
+    <label for="burger-quantity">الكمية:</label>
+    <input
+        type="number"
+        id="burger-quantity"
+        min="1"
+        max="20"
+        value="1"
+    >
+
+    <button
+        class="food-button"
+        onclick="addSelectedQuantity('تميم برجر', 150, 'burger-quantity')"
+    >
+        أضف للسلة
+    </button>
+</div>
+
 
             </div>
         </div>
@@ -99,9 +115,25 @@
 
             <div class="food-bottom">
                 <strong>180 جنيه</strong>
-                <button class="food-button" onclick="addToCart('كرسبي تشيكن', 180)">
-                     أضف للسلة
-                </button>
+                
+<div class="food-order-controls">
+    <label for="crispy-quantity">الكمية:</label>
+    <input
+        type="number"
+        id="crispy-quantity"
+        min="1"
+        max="20"
+        value="1"
+    >
+
+    <button
+        class="food-button"
+        onclick="addSelectedQuantity('كرسبي تشيكن', 180, 'crispy-quantity')"
+    >
+        أضف للسلة
+    </button>
+</div>
+
  
             </div>
         </div>
@@ -121,9 +153,25 @@
             <div class="food-bottom">
                 <strong>50 جنيه</strong>
                
-            <button class="food-button" onclick="addToCart('بطاطس تميم', 50)">
-              أضف للسلة
-            </button>
+            
+<div class="food-order-controls">
+    <label for="fries-quantity">الكمية:</label>
+    <input
+        type="number"
+        id="fries-quantity"
+        min="1"
+        max="20"
+        value="1"
+    >
+
+    <button
+        class="food-button"
+        onclick="addSelectedQuantity('بطاطس تميم', 50, 'fries-quantity')"
+    >
+        أضف للسلة
+    </button>
+</div>
+
 
             </div>
         </div>
