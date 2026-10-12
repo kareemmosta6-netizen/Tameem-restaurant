@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم تميم | وجبات سريعة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">تميم<span>.</span></a>
+
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#menu">قائمة الطعام</a>
+            <a href="#contact">تواصل معنا</a>
+        </nav>
+
+        <a href="#menu" class="nav-button">اطلب دلوقتي</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="tagline">🍔 الطعم اللي يستاهل التجربة</p>
+
+                <h1>
+                    جعان؟<br>
+                    <span>تميم هو الحل!</span>
+                </h1>
+
+                <p class="description">
+                    استمتع بأشهى الوجبات السريعة بطعم مميز
+                    وجودة ترضيك في كل مرة.
+                </p>
+
+                <a href="#menu" class="order-button">
+                    اكتشف وجباتنا ←
+                </a>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85"
+                    alt="برجر شهي من مطعم تميم"
+                >
+                <div class="image-label">
+                    <span>🍔</span>
+                    <div>
+                        <strong>طعم مميز</strong>
+                        <p>كل قضمة ليها حكاية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+<section class="menu-intro" id="menu">
+    <p>اختار اللي بتحبه</p>
+    <h2>وجبتك المفضلة مستنياك</h2>
+    <span>حضّر نفسك لتجربة طعم مميزة مع تميم</span>
+</section>
+
+<section class="menu-grid">
+
+    <article class="food-card">
+        <img
+            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+            alt="برجر لحم"
+        >
+
+        <div class="food-info">
+            <span class="food-category">الأكثر طلبًا</span>
+            <h3>تميم برجر</h3>
+            <p>برجر شهي مع الخضار والصوص المميز.</p>
+
+            <div class="food-bottom">
+                <strong>150 جنيه</strong>
+                <button class="food-button" onclick="orderOnWhatsApp('تميم برجر', 150)">
+    اطلب
+</button>
+            </div>
+        </div>
+    </article>
+
+    <article class="food-card">
+        <img
+            src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
+            alt="فراخ كرسبي"
+        >
+
+        <div class="food-info">
+            <span class="food-category">وجبة مقرمشة</span>
+            <h3>كرسبي تشيكن</h3>
+            <p>قطع فراخ مقرمشة بطعم لذيذ.</p>
+
+            <div class="food-bottom">
+                <strong>180 جنيه</strong>
+                <button class="food-button" onclick="orderOnWhatsApp('كرسبي تشيكن', 180)">
+    اطلب
+</button>
+            </div>
+        </div>
+    </article>
+
+    <article class="food-card">
+        <img
+            src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80"
+            alt="بطاطس مقلية"
+        >
+
+        <div class="food-info">
+            <span class="food-category">وجبة خفيفة</span>
+            <h3>بطاطس تميم</h3>
+            <p>بطاطس ذهبية ومقرمشة مناسبة لكل وقت.</p>
+
+            <div class="food-bottom">
+                <strong>50 جنيه</strong>
+               <button class="food-button" onclick="orderOnWhatsApp('بطاطس تميم', 50)">
+    اطلب
+</button>
+            </div>
+        </div>
+    </article>
+
+</section>
+
+<!-- قسم العروض والخصومات -->
+<section class="offers" id="offers">
+    <div class="offer-content">
+        <span class="offer-label">🔥 عرض لفترة محدودة</span>
+
+        <h2>
+            جعان؟ وفر مع <span>تميم!</span>
+        </h2>
+
+        <p>
+            اطلب وجبتك المفضلة واستمتع بخصم مميز
+            على طلبك القادم.
+        </p>
+
+        <div class="offer-price">
+            <span class="old-price">200 جنيه</span>
+            <strong>150 جنيه</strong>
+        </div>
+
+        <a href="#menu" class="offer-button">
+            اكتشف الوجبات الآن ←
+        </a>
+
+        <small>السعر المعروض مثال توضيحي للعرض.</small>
+    </div>
+
+    <div class="offer-visual">
+        <div class="discount-badge">
+            <strong>25%</strong>
+            <span>خصم</span>
+        </div>
+
+        <img
+            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
+            alt="برجر من مطعم تميم ضمن العرض"
+        >
+    </div>
+</section>
+
+<!-- قسم آراء العملاء -->
+<section class="reviews" id="reviews">
+    <div class="reviews-heading">
+        <p class="reviews-label">آراء عملائنا</p>
+        <h2>تجربتك تهمنا ❤️</h2>
+        <p>نسعى دايمًا إن كل وجبة من تميم تكون تجربة مميزة.</p>
+    </div>
+
+    <div class="reviews-grid">
+        <article class="review-card">
+            <div class="review-stars" aria-label="5 من 5 نجوم">
+                ★★★★★
+            </div>
+            <p>
+                "الوجبة كانت لذيذة، والتصميم ده يخليني
+                أعرف تفاصيل الأكل بسهولة."
+            </p>
+            <div class="review-person">
+                <div class="review-avatar">م</div>
+                <div>
+                    <h3>محمد</h3>
+                    <span>عميل</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="review-card">
+            <div class="review-stars" aria-label="5 من 5 نجوم">
+                ★★★★★
+            </div>
+            <p>
+                "تنوع الوجبات والأسعار الواضحة بيساعدوني
+                أختار اللي يناسبني."
+            </p>
+            <div class="review-person">
+                <div class="review-avatar">أ</div>
+                <div>
+                    <h3>أحمد</h3>
+                    <span>عميل</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="review-card">
+            <div class="review-stars" aria-label="5 من 5 نجوم">
+                ★★★★★
+            </div>
+            <p>
+                "واجهة بسيطة ومنظمة، وكل حاجة واضحة
+                من أول ما افتح الموقع."
+            </p>
+            <div class="review-person">
+                <div class="review-avatar">ع</div>
+                <div>
+                    <h3>عمر</h3>
+                    <span>عميل</span>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+    </main>
+
+    <footer id="contact">
+        <p>© 2026 مطعم تميم - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script src="script.js"></script>
+    
+<a
+  href="https://wa.me/201020025623"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="تواصل مع مطعم تميم عبر واتساب"
+>
+  واتساب
+</a>
+
+</body>
+</html>
