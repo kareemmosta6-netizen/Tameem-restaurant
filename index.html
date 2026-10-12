@@ -78,9 +78,10 @@
 
             <div class="food-bottom">
                 <strong>150 جنيه</strong>
-                <button class="food-button" onclick="orderOnWhatsApp('تميم برجر', 150)">
-    اطلب
-</button>
+                <button class="food-button" onclick="addToCart('تميم برجر', 150)">
+             أضف للسلة
+                </button>
+
             </div>
         </div>
     </article>
@@ -98,9 +99,10 @@
 
             <div class="food-bottom">
                 <strong>180 جنيه</strong>
-                <button class="food-button" onclick="orderOnWhatsApp('كرسبي تشيكن', 180)">
-    اطلب
-</button>
+                <button class="food-button" onclick="addToCart('كرسبي تشيكن', 180)">
+                     أضف للسلة
+                </button>
+ 
             </div>
         </div>
     </article>
@@ -118,13 +120,37 @@
 
             <div class="food-bottom">
                 <strong>50 جنيه</strong>
-               <button class="food-button" onclick="orderOnWhatsApp('بطاطس تميم', 50)">
-    اطلب
-</button>
+               
+            <button class="food-button" onclick="addToCart('بطاطس تميم', 50)">
+              أضف للسلة
+            </button>
+
             </div>
         </div>
     </article>
 
+</section>
+
+<!-- سلة طلبات مطعم تميم -->
+<section class="cart-section" id="cart">
+    <h2>🛒 سلة طلباتك</h2>
+    <p>اختار وجباتك من القائمة وحدد الكمية المطلوبة.</p>
+
+    <div id="cart-items">
+        <p class="empty-cart">لسه ما ضفتش أي وجبات.</p>
+    </div>
+
+    <div class="cart-total">
+        الإجمالي: <span id="cart-total">0</span> جنيه
+    </div>
+
+    <button
+        type="button"
+        class="checkout-button"
+        onclick="checkoutOnWhatsApp()"
+    >
+        أكمل الطلب على واتساب
+    </button>
 </section>
 
 <!-- قسم العروض والخصومات -->

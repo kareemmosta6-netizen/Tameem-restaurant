@@ -708,3 +708,83 @@ footer {
         padding: 12px 16px;
     }
 }
+
+/* سلة طلبات مطعم تميم */
+.cart-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.cart-section h2 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+#cart-items {
+    margin: 20px 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+    text-align: right;
+}
+
+.cart-item input {
+    width: 65px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.remove-item {
+    background: #eee;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.cart-total {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.checkout-button {
+    width: 100%;
+    max-width: 350px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #25D366;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background: #1da851;
+}
+
+@media (max-width: 600px) {
+    .cart-section {
+        margin: 25px 12px;
+        padding: 18px 12px;
+    }
+
+    .cart-item {
+        flex-wrap: wrap;
+    }
+}
