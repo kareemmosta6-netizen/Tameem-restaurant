@@ -4,7 +4,7 @@ const SUPABASE_URL =
 
 // مهم: ضع هنا نفس Publishable Key الموجود في ملفك الحالي
 const SUPABASE_PUBLISHABLE_KEY =
-    "400f21b9-e8af-4217-9cc5-61dbb5f68422";
+    "sb_publishable_67htyNHKtCYMm4fptsEoCg_deg0fX9F";
 
 const RESET_PASSWORD_URL =
     "https://kareemmosta6-netizen.github.io/Tameem-restaurant/reset-password.html";
