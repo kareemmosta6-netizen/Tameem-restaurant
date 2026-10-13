@@ -183,3 +183,52 @@ th {
         max-width: 100%;
     }
 }
+
+/* إحصائيات لوحة إدارة مطعم تميم */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0;
+}
+
+.stat-card {
+    background: var(--tamim-white);
+    border: 1px solid #f0e1d7;
+    border-top: 4px solid var(--tamim-red);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 18px #0000000d;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px #00000012;
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.stat-card p {
+    margin: 8px 0 0;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--tamim-red);
+    line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+}
