@@ -92,6 +92,20 @@ function resetMealForm() {
     cancelEditButton.hidden = true;
 }
 
+function updateMealStats(meals) {
+    const totalElement = document.getElementById("total-meals");
+    const availableElement = document.getElementById("available-meals");
+    const unavailableElement = document.getElementById("unavailable-meals");
+
+    const total = meals.length;
+    const available = meals.filter(meal => meal.is_available).length;
+    const unavailable = total - available;
+
+    if (totalElement) totalElement.textContent = total;
+    if (availableElement) availableElement.textContent = available;
+    if (unavailableElement) unavailableElement.textContent = unavailable;
+}
+
 function addCell(row, value) {
     const cell = document.createElement("td");
     cell.textContent = value;
@@ -116,6 +130,7 @@ async function loadMeals() {
                 "تعذر تحميل الوجبات. راجع صلاحيات جدول meals.";
             return;
         }
+updateMealStats(meals || []);
 
         if (!meals || meals.length === 0) {
             mealsListMessage.textContent =
