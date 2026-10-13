@@ -1,6 +1,10 @@
 
-const SUPABASE_URL = "https://ubraxnjvtkxnyqbwrcua.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_67htyNHKtCYMm4fptsEoCg_deg0fX9F";
+const SUPABASE_URL =
+    "https://ubraxnjvtkxnyqbwrcua.supabase.co";
+
+// استخدم نفس Publishable key الموجود في admin.js
+const SUPABASE_PUBLISHABLE_KEY =
+    "ضع_هنا_مفتاح_Publishable_الخاص_بمشروعك";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
@@ -8,46 +12,65 @@ const supabaseClient = window.supabase.createClient(
 );
 
 const resetForm = document.getElementById("reset-form");
-const message = document.getElementById("message");
+const resetMessage = document.getElementById("reset-message");
+const resetButton = document.getElementById("reset-button");
 
 resetForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const password = document.getElementById("new-password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
+    const confirmation =
+        document.getElementById("confirm-password").value;
 
     if (password.length < 8) {
-        message.textContent = "كلمة المرور لازم تكون 8 أحرف على الأقل.";
+        resetMessage.textContent =
+            "كلمة المرور لازم تكون 8 أحرف على الأقل.";
         return;
     }
 
-    if (password !== confirmPassword) {
-        message.textContent = "كلمتا المرور مش متطابقتين.";
+    if (password !== confirmation) {
+        resetMessage.textContent =
+            "كلمتا المرور مش متطابقتين.";
         return;
     }
 
-    const button = resetForm.querySelector("button");
-    button.disabled = true;
-    message.textContent = "جاري تغيير كلمة المرور...";
+    resetButton.disabled = true;
+    resetMessage.textContent = "جاري التحقق وتغيير كلمة المرور...";
 
     try {
+        // نتأكد إن رابط الاستعادة أنشأ جلسة صالحة
+        const {
+            data: { session },
+            error: sessionError
+        } = await supabaseClient.auth.getSession();
+
+        if (sessionError || !session) {
+            resetMessage.textContent =
+                "رابط الاستعادة غير صالح أو انتهت صلاحيته. اطلب رابطًا جديدًا.";
+            return;
+        }
+
         const { error } = await supabaseClient.auth.updateUser({
-            password: password
+            password
         });
 
         if (error) {
-            message.textContent =
+            resetMessage.textContent =
                 "تعذر تغيير كلمة المرور: " + error.message;
             return;
         }
 
-        message.textContent =
-            "تم تغيير كلمة المرور بنجاح. ارجع وسجّل دخول المدير بكلمة المرور الجديدة.";
+        await supabaseClient.auth.signOut();
 
         resetForm.reset();
+
+        resetMessage.textContent =
+            "تم تغيير كلمة المرور بنجاح. تقدر دلوقتي ترجع لصفحة المدير وتسجّل دخولك.";
     } catch (error) {
-        message.textContent = "حصل خطأ في الاتصال. حاول مرة تانية.";
+        console.error(error);
+        resetMessage.textContent =
+            "حصل خطأ في الاتصال. حاول مرة تانية.";
     } finally {
-        button.disabled = false;
+        resetButton.disabled = false;
     }
 });

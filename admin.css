@@ -1,0 +1,169 @@
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff7ec;
+    color: #171717;
+    line-height: 1.8;
+}
+
+.container {
+    width: min(920px, 92%);
+    margin: 35px auto;
+}
+
+.back-link {
+    color: #c91d24;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page-header {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.page-header h1 {
+    color: #c91d24;
+    margin-bottom: 0;
+    font-size: 34px;
+}
+
+.page-header p {
+    margin-top: 4px;
+}
+
+.panel {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 22px #00000012;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    color: #76151b;
+}
+
+#login-form {
+    max-width: 450px;
+    margin: 20px auto 0;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+}
+
+input:focus {
+    outline: 2px solid #ffc928;
+    border-color: #c91d24;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 13px;
+    margin-top: 15px;
+    background: #c91d24;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #a8171d;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.secondary-button {
+    background: #fff;
+    color: #c91d24;
+    border: 1px solid #c91d24;
+}
+
+.secondary-button:hover {
+    background: #fff0f0;
+    color: #76151b;
+}
+
+#login-message {
+    overflow-wrap: anywhere;
+    color: #76151b;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.dashboard-card {
+    border: 1px solid #f0dfd2;
+    background: #fffaf5;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.dashboard-card h3 {
+    margin-top: 0;
+    color: #c91d24;
+}
+
+.dashboard-card p {
+    margin-bottom: 8px;
+}
+
+.dashboard-card span {
+    color: #777;
+    font-size: 14px;
+}
+
+.logout-button {
+    background: #171717;
+}
+
+.logout-button:hover {
+    background: #333;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px auto;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

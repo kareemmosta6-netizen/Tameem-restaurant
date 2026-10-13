@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة مطعم تميم</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <main class="container">
+        <a class="back-link" href="index.html">← العودة لموقع الزباين</a>
+
+        <header class="page-header">
+            <h1>مطعم تميم</h1>
+            <p>لوحة إدارة المطعم</p>
+        </header>
+
+        <section id="login-section" class="panel">
+            <h2>تسجيل دخول المدير</h2>
+            <p>سجّل دخولك باستخدام حساب المدير المسجل في Supabase.</p>
+
+            <form id="login-form">
+                <label for="email">البريد الإلكتروني</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="البريد الإلكتروني"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="password">كلمة المرور</label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="كلمة المرور"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" id="login-button">
+                    تسجيل الدخول
+                </button>
+
+                <button
+                    type="button"
+                    id="forgot-password-button"
+                    class="secondary-button"
+                >
+                    نسيت كلمة المرور؟
+                </button>
+
+                <p id="login-message" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section id="dashboard-section" class="panel" hidden>
+            <h2>أهلًا بيك في لوحة الإدارة</h2>
+            <p>تم التحقق من صلاحيات حسابك.</p>
+
+            <div class="dashboard-grid">
+                <article class="dashboard-card">
+                    <h3>الوجبات</h3>
+                    <p>إدارة وجبات المطعم</p>
+                    <span>قريبًا</span>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>الطلبات</h3>
+                    <p>متابعة طلبات الزباين</p>
+                    <span>قريبًا</span>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>التوصيل</h3>
+                    <p>إعداد مناطق التوصيل</p>
+                    <span>قريبًا</span>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>المبيعات</h3>
+                    <p>متابعة إجمالي المبيعات</p>
+                    <span>قريبًا</span>
+                </article>
+            </div>
+
+            <button type="button" id="logout-button" class="logout-button">
+                تسجيل الخروج
+            </button>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
