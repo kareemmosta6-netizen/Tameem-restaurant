@@ -188,9 +188,19 @@
         <p class="empty-cart">لسه ما ضفتش أي وجبات.</p>
     </div>
 
-    <div class="cart-total">
-        الإجمالي: <span id="cart-total">0</span> جنيه
-    </div>
+   
+<div class="cart-total">
+    إجمالي الوجبات: <span id="cart-total">0</span> جنيه
+</div>
+
+<div class="cart-total">
+    مصاريف التوصيل: <span id="delivery-cost">0</span> جنيه
+</div>
+
+<div class="cart-total final-total">
+    الإجمالي النهائي: <span id="final-total">0</span> جنيه
+</div>
+
 
     <button
         type="button"
@@ -199,6 +209,41 @@
     >
         أكمل الطلب على واتساب
     </button>
+</section>
+
+<section class="customer-section" id="customer">
+    <h2>بيانات التوصيل</h2>
+
+    <label for="customer-name">الاسم</label>
+    <input
+        type="text"
+        id="customer-name"
+        placeholder="اكتب اسمك"
+        required
+    >
+
+    <label for="customer-phone">رقم الموبايل</label>
+    <input
+        type="tel"
+        id="customer-phone"
+        placeholder="01xxxxxxxxx"
+        required
+    >
+
+<label for="delivery-area">منطقة التوصيل</label>
+<select id="delivery-area" required>
+    <option value="">اختار منطقتك</option>
+    <option value="20" data-area="المنطقة الأولى">المنطقة الأولى - 20 جنيه</option>
+    <option value="30" data-area="المنطقة الثانية">المنطقة الثانية - 30 جنيه</option>
+    <option value="40" data-area="المنطقة الثالثة">المنطقة الثالثة - 40 جنيه</option>
+</select>
+
+    <label for="customer-address">عنوان التوصيل</label>
+    <textarea
+        id="customer-address"
+        placeholder="اكتب عنوان التوصيل بالتفصيل"
+        required
+    ></textarea>
 </section>
 
 <!-- قسم العروض والخصومات -->
