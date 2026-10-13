@@ -2,7 +2,6 @@
 const SUPABASE_URL =
     "https://ubraxnjvtkxnyqbwrcua.supabase.co";
 
-// مهم: ضع هنا نفس Publishable Key الموجود في ملفك الحالي
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_67htyNHKtCYMm4fptsEoCg_deg0fX9F";
 
@@ -14,6 +13,7 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
+// عناصر تسجيل الدخول ولوحة الإدارة
 const loginForm = document.getElementById("login-form");
 const loginSection = document.getElementById("login-section");
 const dashboardSection = document.getElementById("dashboard-section");
@@ -22,6 +22,7 @@ const logoutButton = document.getElementById("logout-button");
 const forgotPasswordButton =
     document.getElementById("forgot-password-button");
 
+// عناصر إدارة الوجبات
 const mealForm = document.getElementById("meal-form");
 const mealIdInput = document.getElementById("meal-id");
 const mealNameInput = document.getElementById("meal-name");
@@ -39,18 +40,21 @@ const mealMessage = document.getElementById("meal-message");
 const mealsListMessage =
     document.getElementById("meals-list-message");
 
+// إظهار شاشة تسجيل الدخول
 function showLogin(message = "") {
     loginSection.hidden = false;
     dashboardSection.hidden = true;
     loginMessage.textContent = message;
 }
 
+// إظهار لوحة الإدارة
 function showDashboard() {
     loginSection.hidden = true;
     dashboardSection.hidden = false;
     loginMessage.textContent = "";
 }
 
+// التحقق من تسجيل الدخول وصلاحيات المدير
 async function verifyAdmin() {
     const {
         data: { user },
@@ -84,6 +88,7 @@ async function verifyAdmin() {
     return true;
 }
 
+// إعادة ضبط نموذج الوجبة
 function resetMealForm() {
     mealForm.reset();
     mealIdInput.value = "";
@@ -92,20 +97,39 @@ function resetMealForm() {
     cancelEditButton.hidden = true;
 }
 
+// تحديث الإحصائيات
 function updateMealStats(meals) {
     const totalElement = document.getElementById("total-meals");
     const availableElement = document.getElementById("available-meals");
-    const unavailableElement = document.getElementById("unavailable-meals");
+    const unavailableElement =
+        document.getElementById("unavailable-meals");
 
     const total = meals.length;
-    const available = meals.filter(meal => meal.is_available).length;
+    const available = meals.filter(
+        meal => meal.is_available === true
+    ).length;
     const unavailable = total - available;
 
-    if (totalElement) totalElement.textContent = total;
-    if (availableElement) availableElement.textContent = available;
-    if (unavailableElement) unavailableElement.textContent = unavailable;
+    if (totalElement) {
+        totalElement.textContent = String(total);
+    }
+
+    if (availableElement) {
+        availableElement.textContent = String(available);
+    }
+
+    if (unavailableElement) {
+        unavailableElement.textContent = String(unavailable);
+    }
+
+    console.log("إحصائيات الوجبات:", {
+        total,
+        available,
+        unavailable
+    });
 }
 
+// إنشاء خلية في جدول الوجبات
 function addCell(row, value) {
     const cell = document.createElement("td");
     cell.textContent = value;
@@ -113,6 +137,7 @@ function addCell(row, value) {
     return cell;
 }
 
+// تحميل الوجبات وتحديث الإحصائيات
 async function loadMeals() {
     refreshMealsButton.disabled = true;
     mealsListMessage.textContent = "جاري تحميل الوجبات...";
@@ -121,7 +146,9 @@ async function loadMeals() {
     try {
         const { data: meals, error } = await supabaseClient
             .from("meals")
-            .select("id, name, price, is_available, description, image_url")
+            .select(
+                "id, name, price, is_available, description, image_url"
+            )
             .order("id", { ascending: false });
 
         if (error) {
@@ -130,7 +157,9 @@ async function loadMeals() {
                 "تعذر تحميل الوجبات. راجع صلاحيات جدول meals.";
             return;
         }
-updateMealStats(meals || []);
+
+        // تحديث الإحصائيات بالبيانات الحقيقية
+        updateMealStats(meals || []);
 
         if (!meals || meals.length === 0) {
             mealsListMessage.textContent =
@@ -141,22 +170,32 @@ updateMealStats(meals || []);
         mealsListMessage.textContent =
             `عدد الوجبات: ${meals.length}`;
 
+        // عرض كل وجبة في الجدول
         meals.forEach((meal) => {
             const row = document.createElement("tr");
 
             addCell(row, meal.name);
-            addCell(row, `${Number(meal.price).toFixed(2)} جنيه`);
-            addCell(row, meal.is_available ? "متاحة" : "غير متاحة");
+            addCell(
+                row,
+                `${Number(meal.price).toFixed(2)} جنيه`
+            );
+            addCell(
+                row,
+                meal.is_available ? "متاحة" : "غير متاحة"
+            );
 
             const actionsCell = document.createElement("td");
 
+            // زر تعديل الوجبة
             const editButton = document.createElement("button");
             editButton.type = "button";
             editButton.textContent = "تعديل";
+
             editButton.addEventListener("click", () => {
                 mealIdInput.value = meal.id;
                 mealNameInput.value = meal.name;
-                mealDescriptionInput.value = meal.description || "";
+                mealDescriptionInput.value =
+                    meal.description || "";
                 mealPriceInput.value = meal.price;
                 mealImageInput.value = meal.image_url || "";
                 mealAvailableInput.checked = meal.is_available;
@@ -172,38 +211,59 @@ updateMealStats(meals || []);
                 });
             });
 
+            // زر حذف الوجبة
             const deleteButton = document.createElement("button");
             deleteButton.type = "button";
             deleteButton.textContent = "حذف";
             deleteButton.className = "logout-button";
+
             deleteButton.addEventListener("click", async () => {
                 const confirmed = window.confirm(
                     `هل أنت متأكد إنك عايز تحذف وجبة "${meal.name}"؟`
                 );
 
-                if (!confirmed) return;
-
-                deleteButton.disabled = true;
-
-                const { error: deleteError } = await supabaseClient
-                    .from("meals")
-                    .delete()
-                    .eq("id", meal.id);
-
-                if (deleteError) {
-                    console.error("Delete meal error:", deleteError);
-                    mealsListMessage.textContent =
-                        "فشل حذف الوجبة. راجع صلاحيات الحذف.";
-                    deleteButton.disabled = false;
+                if (!confirmed) {
                     return;
                 }
 
-                if (mealIdInput.value === String(meal.id)) {
-                    resetMealForm();
-                }
+                deleteButton.disabled = true;
 
-                mealMessage.textContent = "";
-                await loadMeals();
+                try {
+                    const { error: deleteError } =
+                        await supabaseClient
+                            .from("meals")
+                            .delete()
+                            .eq("id", meal.id);
+
+                    if (deleteError) {
+                        console.error(
+                            "Delete meal error:",
+                            deleteError
+                        );
+
+                        mealsListMessage.textContent =
+                            "فشل حذف الوجبة. راجع صلاحيات الحذف.";
+
+                        deleteButton.disabled = false;
+                        return;
+                    }
+
+                    if (
+                        mealIdInput.value === String(meal.id)
+                    ) {
+                        resetMealForm();
+                    }
+
+                    mealMessage.textContent =
+                        "تم حذف الوجبة بنجاح.";
+
+                    await loadMeals();
+                } catch (error) {
+                    console.error(error);
+                    mealsListMessage.textContent =
+                        "حصل خطأ أثناء حذف الوجبة.";
+                    deleteButton.disabled = false;
+                }
             });
 
             actionsCell.append(editButton, deleteButton);
@@ -219,25 +279,33 @@ updateMealStats(meals || []);
     }
 }
 
+// تسجيل الدخول
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const loginButton = document.getElementById("login-button");
+    const email =
+        document.getElementById("email").value.trim();
+    const password =
+        document.getElementById("password").value;
+    const loginButton =
+        document.getElementById("login-button");
 
     loginButton.disabled = true;
-    loginMessage.textContent = "جاري التحقق من البيانات...";
+    loginMessage.textContent =
+        "جاري التحقق من البيانات...";
 
     try {
-        const { error } = await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
+        const { error } =
+            await supabaseClient.auth.signInWithPassword({
+                email,
+                password
+            });
 
         if (error) {
             console.error("Login error:", error);
-            showLogin("فشل تسجيل الدخول. راجع البريد وكلمة المرور.");
+            showLogin(
+                "فشل تسجيل الدخول. راجع البريد وكلمة المرور."
+            );
             return;
         }
 
@@ -254,8 +322,10 @@ loginForm.addEventListener("submit", async (event) => {
     }
 });
 
+// استعادة كلمة المرور
 forgotPasswordButton.addEventListener("click", async () => {
-    const email = document.getElementById("email").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
 
     if (!email) {
         loginMessage.textContent =
@@ -265,13 +335,17 @@ forgotPasswordButton.addEventListener("click", async () => {
     }
 
     forgotPasswordButton.disabled = true;
-    loginMessage.textContent = "جاري إرسال رابط الاستعادة...";
+    loginMessage.textContent =
+        "جاري إرسال رابط الاستعادة...";
 
     try {
         const { error } =
-            await supabaseClient.auth.resetPasswordForEmail(email, {
-                redirectTo: RESET_PASSWORD_URL
-            });
+            await supabaseClient.auth.resetPasswordForEmail(
+                email,
+                {
+                    redirectTo: RESET_PASSWORD_URL
+                }
+            );
 
         if (error) {
             console.error("Recovery error:", error);
@@ -284,12 +358,14 @@ forgotPasswordButton.addEventListener("click", async () => {
             "لو البريد مسجل، هتوصلك رسالة استعادة. راجع الوارد وSpam.";
     } catch (error) {
         console.error(error);
-        loginMessage.textContent = "حصل خطأ في الاتصال.";
+        loginMessage.textContent =
+            "حصل خطأ في الاتصال.";
     } finally {
         forgotPasswordButton.disabled = false;
     }
 });
 
+// إضافة وجبة جديدة أو حفظ التعديلات
 mealForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -300,7 +376,11 @@ mealForm.addEventListener("submit", async (event) => {
     const isAvailable = mealAvailableInput.checked;
     const mealId = mealIdInput.value;
 
-    if (!name || !Number.isFinite(price) || price <= 0) {
+    if (
+        !name ||
+        !Number.isFinite(price) ||
+        price <= 0
+    ) {
         mealMessage.textContent =
             "اكتب اسم الوجبة وسعرًا أكبر من صفر.";
         return;
@@ -310,8 +390,10 @@ mealForm.addEventListener("submit", async (event) => {
         try {
             const parsedUrl = new URL(imageUrl);
 
-            if (parsedUrl.protocol !== "https:" &&
-                parsedUrl.protocol !== "http:") {
+            if (
+                parsedUrl.protocol !== "https:" &&
+                parsedUrl.protocol !== "http:"
+            ) {
                 throw new Error("Invalid image URL");
             }
         } catch {
@@ -376,27 +458,37 @@ mealForm.addEventListener("submit", async (event) => {
     }
 });
 
+// إلغاء تعديل الوجبة
 cancelEditButton.addEventListener("click", () => {
     resetMealForm();
     mealMessage.textContent = "تم إلغاء التعديل.";
 });
 
+// تحديث جدول الوجبات يدويًا
 refreshMealsButton.addEventListener("click", loadMeals);
 
+// تسجيل الخروج
 logoutButton.addEventListener("click", async () => {
     logoutButton.disabled = true;
 
     try {
-        await supabaseClient.auth.signOut();
+        const { error } = await supabaseClient.auth.signOut();
+
+        if (error) {
+            throw error;
+        }
+
         showLogin("تم تسجيل الخروج.");
     } catch (error) {
         console.error(error);
-        loginMessage.textContent = "تعذر تسجيل الخروج. حاول مرة تانية.";
+        loginMessage.textContent =
+            "تعذر تسجيل الخروج. حاول مرة تانية.";
     } finally {
         logoutButton.disabled = false;
     }
 });
 
+// تشغيل لوحة الإدارة عند فتح الصفحة
 async function initializeAdmin() {
     showLogin();
 
@@ -408,7 +500,9 @@ async function initializeAdmin() {
         }
     } catch (error) {
         console.error(error);
-        showLogin("تعذر الاتصال. راجع إعدادات المشروع.");
+        showLogin(
+            "تعذر الاتصال. راجع إعدادات المشروع."
+        );
     }
 }
 
